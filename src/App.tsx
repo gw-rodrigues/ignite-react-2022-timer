@@ -10,7 +10,7 @@ export function App() {
       <Button variant="success" />
       <Button variant="danger" />
       <Button variant="secondary" />
-      dwadwad
+
       <GlobalStyle />
     </ThemeProvider>
   );
