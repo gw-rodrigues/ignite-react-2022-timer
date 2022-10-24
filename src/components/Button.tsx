@@ -5,5 +5,5 @@ interface IButtonVariants {
 }
 
 export function Button({ variant = 'primary' }: IButtonVariants) {
-  return <ButtonContainer variant={variant} />;
+  return <ButtonContainer variant={variant}>Enviar</ButtonContainer>;
 }
