@@ -1,9 +1,9 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from 'styled-components'
 
-export type TButtonVariant = 'primary' | 'secondary' | 'danger' | 'success';
+export type TButtonVariant = 'primary' | 'secondary' | 'danger' | 'success'
 
 interface IButtonContainerProps {
-  variant: TButtonVariant;
+  variant: TButtonVariant
 }
 
 const buttonVariants = {
@@ -11,7 +11,7 @@ const buttonVariants = {
   secondary: 'orange',
   danger: 'red',
   success: 'green',
-};
+}
 
 export const ButtonContainer = styled.button<IButtonContainerProps>`
   width: 100px;
@@ -27,7 +27,7 @@ export const ButtonContainer = styled.button<IButtonContainerProps>`
   ${(props) => {
     return css`
       background-color: ${buttonVariants[props.variant]};
-    `;
+    `
   }}
   */
-`;
+`
