@@ -3,6 +3,13 @@ import { DefaultLayout } from './layouts/Default.layout'
 import { History } from './pages/History'
 import { Home } from './pages/Home'
 
+/**
+ * Routes
+ * Todas as rotas "Route" tem um path = url e um página associada
+ * Quando uma "Route" tem outras "Route" dentro porque é uma Layout
+ *
+ */
+
 export function Router() {
   return (
     <Routes>
