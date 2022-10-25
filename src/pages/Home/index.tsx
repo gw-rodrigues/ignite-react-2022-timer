@@ -9,6 +9,21 @@ import {
   TaskInput,
 } from './styles'
 
+/**
+ * FORMS Controlled | Uncontrolled
+ *
+ * Controlled -> manter em tempo real o estado ou informação, sempre que o usuário escreve no input.
+ * Ex:
+ * - const [task, setTask] = useState("")
+ * - <input onChange={(e)=>{setTask(e.target.value)}} />
+ *
+ *
+ * Uncontrolled -> buscamos, pegamos a informação do input somente quando precisamos dela.
+ * Ex:
+ *  function handleSubmit(event){ event.target.value ...}
+ *  <form onSubmit={handleSubmit}>...</form>
+ */
+
 export function Home() {
   return (
     <HomeContainer>
