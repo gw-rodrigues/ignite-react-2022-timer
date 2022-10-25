@@ -71,9 +71,26 @@ const newCycleFormValidationSchema = zod.object({
     .max(60, 'O ciclo precisa ser no máximo de 60 minutos.'),
 })
 
+/**
+ * Podemos usar interface, esta certo, mais podemos buscar e usar dos tipos criado dentro do zod.object({})
+ */
+// interface INewCycleFormData {
+//   task: string
+//   minutesAmount: number
+// }
+
+/**
+ * no zod.infer -> quando inferimos "sendo função typescript" retorna os tipos da variável, MAS como typescript nao sabe tratar/funcionar com  uma variável, temos usar o "typeof"
+ */
+type TNewCycleFormData = zod.infer<typeof newCycleFormValidationSchema>
+
 export function Home() {
-  const { register, handleSubmit, watch } = useForm({
+  const { register, handleSubmit, watch } = useForm<TNewCycleFormData>({
     resolver: zodResolver(newCycleFormValidationSchema),
+    defaultValues: {
+      task: '',
+      minutesAmount: 0,
+    },
   })
 
   function handleCreateNewCycle(data: any) {}
