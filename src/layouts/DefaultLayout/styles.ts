@@ -12,4 +12,6 @@ export const LayoutContainer = styled.div`
 
   display: flex;
   flex-direction: column;
+
+  box-shadow: 0 10px 15px -8px black;
 `
