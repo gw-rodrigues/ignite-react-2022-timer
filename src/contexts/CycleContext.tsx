@@ -1,4 +1,10 @@
-import { createContext, ReactNode, useReducer, useState } from 'react'
+import {
+  createContext,
+  ReactNode,
+  useEffect,
+  useReducer,
+  useState,
+} from 'react'
 import {
   addNewCycleAction,
   interruptCurrentCycleAction,
@@ -78,18 +84,44 @@ export function CycleContextProvider({ children }: ICycleContextProvider) {
    *      }
    *    })
    *
+   *
+   *    Param 3 -> useReducer recebe um terceiro parâmetro, onde
+   *      podemos obter ou definir valores assim que o useReducer
+   *      é criado, através de uma função.
+   *
+   *                              param 1        param 2   param 3
+   *  const [...] = useReducer( (state, action)=>{} , [], ()=>{})
+   *
    */
 
-  const [cyclesState, dispatch] = useReducer(cyclesReducer, {
-    cycles: [],
-    activeCycleId: null,
-  })
+  const [cyclesState, dispatch] = useReducer(
+    cyclesReducer,
+    {
+      cycles: [],
+      activeCycleId: null,
+    },
+    () => {
+      const storeStateJSON = localStorage.getItem(
+        '@ignite-timer:cycles-state-1.0.0',
+      )
+
+      if (storeStateJSON) {
+        return JSON.parse(storeStateJSON)
+      }
+    },
+  )
 
   const [amountSecondsPassed, setAmountSecondsPassed] = useState(0)
 
   const { cycles, activeCycleId } = cyclesState
 
   const activeCycle = cycles.find((cycle) => cycle.id === activeCycleId)
+
+  useEffect(() => {
+    const stateJSON = JSON.stringify(cyclesState)
+
+    localStorage.setItem('@ignite-timer:cycles-state-1.0.0', stateJSON)
+  }, [cyclesState])
 
   function setSecondsPassed(seconds: number) {
     setAmountSecondsPassed(seconds)
