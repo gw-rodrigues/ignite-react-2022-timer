@@ -2,7 +2,13 @@ import { useContext } from 'react'
 import { formatDistanceToNow } from 'date-fns'
 import ptBR from 'date-fns/locale/pt-BR'
 import { CyclesContext } from '../../contexts/CycleContext'
-import { HistoryContainer, HistoryList, Status } from './styles'
+import {
+  HistoryContainer,
+  HistoryList,
+  HistoryListCell,
+  HistoryListRow,
+  Status,
+} from './styles'
 
 export function History() {
   const { cycles } = useContext(CyclesContext)
@@ -12,41 +18,41 @@ export function History() {
       <h1>Meu Histórico</h1>
 
       <HistoryList>
-        <table>
-          <thead>
-            <tr>
-              <th>Tarefa</th>
-              <th>Duração</th>
-              <th>Início</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {cycles.map((cycle) => (
-              <tr key={cycle.id}>
-                <td>{cycle.task}</td>
-                <td>{cycle.minutesAmount}</td>
-                <td>
-                  {formatDistanceToNow(new Date(cycle.startDate), {
-                    addSuffix: true,
-                    locale: ptBR,
-                  })}
-                </td>
-                <td>
-                  {cycle.finishedDate && (
-                    <Status statusColor="green">Concluído</Status>
-                  )}
-                  {cycle.interruptDate && (
-                    <Status statusColor="red">Interrompido</Status>
-                  )}
-                  {!cycle.finishedDate && !cycle.interruptDate && (
-                    <Status statusColor="yellow">Em andamento</Status>
-                  )}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        {cycles.map((cycle) => (
+          <HistoryListRow key={cycle.id}>
+            <HistoryListCell>
+              <p>Tarefa</p>
+              <p>{cycle.task}</p>
+            </HistoryListCell>
+            <HistoryListCell>
+              <p>Duração </p>
+              <p>{cycle.minutesAmount}</p>
+            </HistoryListCell>
+            <HistoryListCell>
+              <p>Início </p>
+              <p>
+                {formatDistanceToNow(new Date(cycle.startDate), {
+                  addSuffix: true,
+                  locale: ptBR,
+                })}
+              </p>
+            </HistoryListCell>
+            <HistoryListCell>
+              <p>Status</p>
+              <p>
+                {cycle.finishedDate && (
+                  <Status statusColor="green">Concluído</Status>
+                )}
+                {cycle.interruptDate && (
+                  <Status statusColor="red">Interrompido</Status>
+                )}
+                {!cycle.finishedDate && !cycle.interruptDate && (
+                  <Status statusColor="yellow">Em andamento</Status>
+                )}
+              </p>
+            </HistoryListCell>
+          </HistoryListRow>
+        ))}
       </HistoryList>
     </HistoryContainer>
   )
