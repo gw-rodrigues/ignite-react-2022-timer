@@ -8,6 +8,19 @@ export const CountDownContainer = styled.div`
 
   display: flex;
   gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 820px) {
+    flex-direction: column;
+    gap: 0;
+  }
+`
+
+export const NumberBoard = styled.div`
+  display: flex;
+  gap: 1rem;
 
   span {
     background: ${(props) => props.theme['gray-700']};
@@ -15,6 +28,11 @@ export const CountDownContainer = styled.div`
     border-radius: 8px;
 
     box-shadow: 5px 8px 8px -8px black;
+  }
+  @media (max-width: 820px) {
+    span {
+      padding: 2rem 0.5rem;
+    }
   }
 `
 
@@ -26,4 +44,11 @@ export const Separator = styled.div`
   overflow: hidden;
   display: flex;
   justify-content: center;
+  align-items: center;
+
+  @media (max-width: 820px) {
+    transform: rotate(90deg);
+    padding: 0;
+    margin-left: 2rem;
+  }
 `

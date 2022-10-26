@@ -4,6 +4,8 @@ export const HistoryContainer = styled.div`
   flex: 1;
   padding: 3.5rem;
 
+  width: 100%;
+
   display: flex;
   flex-direction: column;
 
@@ -11,11 +13,15 @@ export const HistoryContainer = styled.div`
     font-size: 1.5rem;
     color: ${(props) => props.theme['gray-100']};
   }
+
+  @media (max-width: 765px) {
+    padding: 3.5rem 0;
+  }
 `
 
 export const HistoryList = styled.div`
   flex: 1;
-  overflow: auto;
+
   margin-top: 2rem;
 
   /* table {

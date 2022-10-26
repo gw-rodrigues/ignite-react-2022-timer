@@ -31,4 +31,9 @@ export const HeaderContainer = styled.div`
       }
     }
   }
+
+  @media (max-width: 360px) {
+    flex-direction: column;
+    gap: 2rem;
+  }
 `
