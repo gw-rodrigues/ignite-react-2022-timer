@@ -6,7 +6,6 @@ import { CyclesContext } from '../../../../contexts/CycleContext'
 export function Countdown() {
   const {
     activeCycle,
-    activeCycleId,
     markCurrentCycleAsFinished,
     amountSecondsPassed,
     setSecondsPassed,
@@ -48,13 +47,7 @@ export function Countdown() {
     return () => {
       clearInterval(interval)
     }
-  }, [
-    activeCycle,
-    totalSeconds,
-    activeCycleId,
-    markCurrentCycleAsFinished,
-    setSecondsPassed,
-  ])
+  }, [activeCycle, totalSeconds, markCurrentCycleAsFinished, setSecondsPassed])
 
   return (
     <CountDownContainer>
