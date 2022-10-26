@@ -1,3 +1,10 @@
+/**
+ * Immer -> biblioteca para trabalhar estado imutáveis.
+ *    quando precisamos fazer alterações nosso array, especifica
+ *    posição, ou uso de .map, etc... immer ajudar a simplificar
+ *    no final faz a conversão.
+ */
+import { produce } from 'immer'
 import { EActionsTypes } from './actions'
 
 export interface ICycle {
