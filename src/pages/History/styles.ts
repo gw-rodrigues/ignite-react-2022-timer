@@ -18,7 +18,7 @@ export const HistoryList = styled.div`
   overflow: auto;
   margin-top: 2rem;
 
-  table {
+  /* table {
     width: 100%;
     border-collapse: collapse;
     min-width: 600px;
@@ -56,6 +56,60 @@ export const HistoryList = styled.div`
         padding-right: 1.5rem;
       }
     }
+  } */
+`
+export const HistoryListRow = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+
+  & + & {
+    margin-top: 1rem;
+  }
+
+  background-color: ${(props) => props.theme['gray-600']};
+  border-top: 4px solid ${(props) => props.theme['gray-400']};
+
+  color: ${(props) => props.theme['gray-100']};
+  font-size: 0.875rem;
+  line-height: 1.6;
+
+  &:first-child {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+  }
+
+  &:last-child {
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+  }
+`
+
+export const HistoryListCell = styled.div`
+  flex: 1 0 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 0.875rem;
+  line-height: 1.6;
+  text-align: center;
+  border: 1px solid ${(props) => props.theme['gray-800']};
+
+  p {
+    padding: 0.5rem;
+  }
+
+  p:first-child {
+    width: 100%;
+    font-size: 1rem;
+    font-weight: 700;
+
+    color: ${(props) => props.theme['gray-400']};
+    background-color: ${(props) => props.theme['gray-700']};
   }
 `
 
