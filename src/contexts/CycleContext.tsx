@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useState } from 'react'
+import { createContext, ReactNode, useReducer, useState } from 'react'
 
 interface ICreateCycleData {
   task: string
@@ -61,8 +61,31 @@ export function CycleContextProvider({ children }: ICycleContextProvider) {
    *                               param 1          param 2
    *  const [...] = useReducer( (state, action)=>{} , [])
    *
+   *  Variável -> agora nao temos mais o setCycle, mais sim o
+   *    "dispatch", dizemos que vamos disparar uma ação para
+   *    alterar essa variável.
+   *
+   *  const [cycles, dispatch] = useReducer(...)
+   *
+   *  dispatch -> para usarmos o, se passarmos apenas um valor,
+   *    dispacth(valor) nao conseguimos saber qual e a ação feita
+   *    (add, alterar, remover, etc...), então precisamos ter
+   *    formato objeto semelhante, podemos usar qualquer nomes para
+   *    as chaves do objeto.
+   *
+   *    dispatch({
+   *      type:"ADD_NEW_CYCLE",
+   *      payload: {
+   *        newCycle
+   *      }
+   *    })
+   *
    */
-  const [cycles, setCycles] = useState<ICycle[]>([])
+  const [cycles, dispatch] = useReducer((state: ICycle[], action: any) => {
+    console.log(state)
+    console.log(action)
+    return state
+  }, [])
   const [activeCycleId, setActiveCycleId] = useState<string | null>(null)
   const [amountSecondsPassed, setAmountSecondsPassed] = useState(0)
   const activeCycle = cycles.find((cycle) => cycle.id === activeCycleId)
@@ -91,21 +114,23 @@ export function CycleContextProvider({ children }: ICycleContextProvider) {
       minutesAmount: data.minutesAmount,
       startDate: new Date(),
     }
-    setCycles((state) => [...state, newCycle])
+
+    dispatch()
+    // setCycles((state) => [...state, newCycle])
     setActiveCycleId(id)
     setAmountSecondsPassed(0)
   }
 
   function interruptCurrentCycle() {
-    setCycles((state) =>
-      state.map((cycle) => {
-        if (cycle.id === activeCycleId) {
-          return { ...cycle, interruptDate: new Date() }
-        } else {
-          return cycle
-        }
-      }),
-    )
+    // setCycles((state) =>
+    //   state.map((cycle) => {
+    //     if (cycle.id === activeCycleId) {
+    //       return { ...cycle, interruptDate: new Date() }
+    //     } else {
+    //       return cycle
+    //     }
+    //   }),
+    // )
     setActiveCycleId(null)
   }
 
