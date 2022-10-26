@@ -44,6 +44,7 @@ export const CyclesContext = createContext({} as ICyclesContextType)
  *    <Router /> -> children (home/history/etc...)
  * </CycleContextProvider>
  */
+
 export function CycleContextProvider({ children }: ICycleContextProvider) {
   /**
    *  useReducer ? -> é igual ao useState, mas é usado quando
@@ -84,6 +85,10 @@ export function CycleContextProvider({ children }: ICycleContextProvider) {
   const [cycles, dispatch] = useReducer((state: ICycle[], action: any) => {
     console.log(state)
     console.log(action)
+    if (action.type === 'ADD_NEW_CYCLE') {
+      return [...state, action.payload.newCycle]
+    }
+
     return state
   }, [])
   const [activeCycleId, setActiveCycleId] = useState<string | null>(null)
@@ -95,15 +100,19 @@ export function CycleContextProvider({ children }: ICycleContextProvider) {
   }
 
   function markCurrentCycleAsFinished() {
-    setCycles((state) =>
-      state.map((cycle) => {
-        if (cycle.id === activeCycleId) {
-          return { ...cycle, finishedDate: new Date() }
-        } else {
-          return cycle
-        }
-      }),
-    )
+    dispatch({
+      type: 'MARK_CURRENT_CYCLE_AS_FINISHED',
+      payload: { activeCycleId },
+    })
+    // setCycles((state) =>
+    //   state.map((cycle) => {
+    //     if (cycle.id === activeCycleId) {
+    //       return { ...cycle, finishedDate: new Date() }
+    //     } else {
+    //       return cycle
+    //     }
+    //   }),
+    // )
   }
 
   function createNewCycle(data: ICreateCycleData) {
@@ -115,13 +124,20 @@ export function CycleContextProvider({ children }: ICycleContextProvider) {
       startDate: new Date(),
     }
 
-    dispatch()
+    dispatch({
+      type: 'ADD_NEW_CYCLE',
+      payload: { newCycle },
+    })
     // setCycles((state) => [...state, newCycle])
     setActiveCycleId(id)
     setAmountSecondsPassed(0)
   }
 
   function interruptCurrentCycle() {
+    dispatch({
+      type: 'INTERRUPT_CURRENT_CYCLE',
+      payload: { activeCycleId },
+    })
     // setCycles((state) =>
     //   state.map((cycle) => {
     //     if (cycle.id === activeCycleId) {
