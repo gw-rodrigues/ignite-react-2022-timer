@@ -45,6 +45,23 @@ export const CyclesContext = createContext({} as ICyclesContextType)
  * </CycleContextProvider>
  */
 export function CycleContextProvider({ children }: ICycleContextProvider) {
+  /**
+   *  useReducer ? -> é igual ao useState, mas é usado quando
+   *  temos que fazer "ação" quando vamos alterar
+   *  a informação da variável/state.
+   *
+   *                            param 1      param 2
+   *  const [...] = useReducer( função , valor-inicial-state )
+   *
+   *  função -> recebe dos paramentos:
+   *    - state = valor atual/tempo real do variável/state.
+   *    - action = qual "ação" precisa ser feito para alterar o
+   *      variável/state (adicionar, remover, alterar, etc...).
+   *
+   *                               param 1          param 2
+   *  const [...] = useReducer( (state, action)=>{} , [])
+   *
+   */
   const [cycles, setCycles] = useState<ICycle[]>([])
   const [activeCycleId, setActiveCycleId] = useState<string | null>(null)
   const [amountSecondsPassed, setAmountSecondsPassed] = useState(0)
