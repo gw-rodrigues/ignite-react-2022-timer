@@ -12,16 +12,25 @@ interface ICycleState {
   activeCycleId: string | null
 }
 
+export enum EActionsTypes {
+  // eslint-disable-next-line no-unused-vars
+  ADD_NEW_CYCLE = 'ADD_NEW_CYCLE',
+  // eslint-disable-next-line no-unused-vars
+  INTERRUPT_CURRENT_CYCLE = 'INTERRUPT_CURRENT_CYCLE',
+  // eslint-disable-next-line no-unused-vars
+  MARK_CURRENT_CYCLE_AS_FINISHED = 'MARK_CURRENT_CYCLE_AS_FINISHED',
+}
+
 export function cyclesReducer(state: ICycleState, action: any) {
   switch (action.type) {
-    case 'ADD_NEW_CYCLE':
+    case EActionsTypes.ADD_NEW_CYCLE:
       return {
         ...state,
         cycles: [...state.cycles, action.payload.newCycle],
         activeCycleId: action.payload.newCycle.id,
       }
 
-    case 'INTERRUPT_CURRENT_CYCLE':
+    case EActionsTypes.INTERRUPT_CURRENT_CYCLE:
       return {
         ...state,
         cycles: state.cycles.map((cycle) => {
@@ -34,7 +43,7 @@ export function cyclesReducer(state: ICycleState, action: any) {
         activeCycleId: null,
       }
 
-    case 'MARK_CURRENT_CYCLE_AS_FINISHED':
+    case EActionsTypes.MARK_CURRENT_CYCLE_AS_FINISHED:
       return {
         ...state,
         cycles: state.cycles.map((cycle) => {
